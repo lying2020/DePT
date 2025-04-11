@@ -6,7 +6,7 @@
 # 5: root
 # 6: shots
 # 7: load epoch
-TRAIN_CMD_TEMPLATE_BASE_TO_NEW = r'''python train.py \
+TRAIN_CMD_TEMPLATE_BASE_TO_NEW = r'''python3 train.py \
 --root {0} \
 --seed {1} \
 --trainer {2} \
@@ -15,7 +15,7 @@ TRAIN_CMD_TEMPLATE_BASE_TO_NEW = r'''python train.py \
 --output-dir {5}/train_base/{2}/{3}/shots{6}/{4}/seed{1} \
 DATASET.NUM_SHOTS {6} DATASET.SUBSAMPLE_CLASSES base '''
 
-TEST_CMD_TEMPLATE_BASE_TO_NEW = r'''python train.py \
+TEST_CMD_TEMPLATE_BASE_TO_NEW = r'''python3 train.py \
 --root {0} \
 --seed {1} \
 --trainer {2} \
@@ -36,7 +36,7 @@ DATASET.NUM_SHOTS {6} DATASET.SUBSAMPLE_CLASSES new '''
 # 6: shots
 # 7: load dataset
 # 8: load epoch
-TRAIN_CMD_TEMPLATE_CROSS_DATASET = r'''python train.py \
+TRAIN_CMD_TEMPLATE_CROSS_DATASET = r'''python3 train.py \
 --root {0} \
 --seed {1} \
 --trainer {2} \

@@ -6,7 +6,7 @@ import os.path as osp
 import shutil
 
 from utils.gpu_allocater import GPUAllocater
-from utils.logger import setup_logger, print
+from utils.logger import setup_logger
 from utils.mail import MailClient
 from utils.result_parser import ResultParser
 
@@ -46,31 +46,36 @@ class ParallelRunner(object):
 
         start_time = datetime.datetime.now()
 
-        try:
-            # main
-            if grid_search_cfg['enable']:
-                result_paths = self.run_grid_serach() 
-            else:
-                result_paths = [self.run_single()]
-        except:
-            # handle exception, contents of exception will be sent to your email
-            end_time = datetime.datetime.now()
-            contents = [f'<b>Training tasks FAILED!</b> Time cost: {end_time - start_time}\n\n', 
-                        '<b>Exception is following above:</b>\n']
+        # main
+        if grid_search_cfg['enable']:
+            result_paths = self.run_grid_serach() 
+        else:
+            result_paths = [self.run_single()]
+        # try:
+        #     # main
+        #     if grid_search_cfg['enable']:
+        #         result_paths = self.run_grid_serach() 
+        #     else:
+        #         result_paths = [self.run_single()]
+        # except:
+        #     # handle exception, contents of exception will be sent to your email
+        #     end_time = datetime.datetime.now()
+        #     contents = [f'<b>Training tasks FAILED!</b> Time cost: {end_time - start_time}\n\n', 
+        #                 '<b>Exception is following above:</b>\n']
 
-            exception_path = osp.join(output_cfg['root'], 'exceptions.txt')
-            with open(exception_path) as f:
-                contents += f.readlines()
+        #     exception_path = osp.join(output_cfg['root'], 'exceptions.txt')
+        #     with open(exception_path) as f:
+        #         contents += f.readlines()
             
-            print('Training tasks FAILED! Mail will be sent >>> {}'.format(self.mail_cfg['to']))
-            self.mail.send('Training Tasks FAILED!', contents)
-            return
+        #     print('Training tasks FAILED! Mail will be sent >>> {}'.format(self.mail_cfg['to']))
+        #     self.mail.send('Training Tasks FAILED!', contents)
+        #     return
 
         # after finished, results will be sent to your email
         end_time = datetime.datetime.now()
         contents = [f'<b>Training tasks FINISHED!</b> Time cost: {end_time - start_time}\n\n', 
                     '<b>Results are following above:</b>\n']
-        
+
         for result_path in result_paths:
             contents += [f'\n<b>{result_path}</b>\n']
             with open(result_path) as f:
@@ -246,6 +251,6 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cfg', type=str)
+    parser.add_argument('--cfg', type=str, default='maple')
     args = parser.parse_args()
     main(args)

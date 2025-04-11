@@ -3,13 +3,18 @@ import copy
 
 base = dict(
     # dataset configs
+    # data = dict(
+    #     root='root of datasets here',
+    #     datasets_base_to_new=['dtd', 'caltech101', 'eurosat', 'ucf101', 'oxford_flowers', 
+    #                           'oxford_pets', 'stanford_cars', 'fgvc_aircraft', 'food101', 'sun397', 'imagenet'],
+    #     datasets_cross_dataset=['caltech101', 'oxford_pets', 'stanford_cars', 'oxford_flowers', 'food101',
+    #                             'fgvc_aircraft', 'sun397', 'dtd', 'eurosat', 'ucf101',
+    #                             'imagenetv2', 'imagenet_sketch', 'imagenet_a', 'imagenet_r'],
+    # ),
     data = dict(
-        root='root of datasets here',
-        datasets_base_to_new=['dtd', 'caltech101', 'eurosat', 'ucf101', 'oxford_flowers', 
-                              'oxford_pets', 'stanford_cars', 'fgvc_aircraft', 'food101', 'sun397', 'imagenet'],
-        datasets_cross_dataset=['caltech101', 'oxford_pets', 'stanford_cars', 'oxford_flowers', 'food101',
-                                'fgvc_aircraft', 'sun397', 'dtd', 'eurosat', 'ucf101',
-                                'imagenetv2', 'imagenet_sketch', 'imagenet_a', 'imagenet_r'],
+        root='/research/cbim/vast/cj574/data',
+        datasets_base_to_new=['dtd'],
+        datasets_cross_dataset=['dtd', 'oxford_flowers'],
     ),
 
     # mail configs
